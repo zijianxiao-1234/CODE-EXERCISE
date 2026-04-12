@@ -1,0 +1,67 @@
+#include <stdio.h>
+
+int my_isalpha(char ch);
+int my_isdigit(char ch);
+int my_is_upper(char ch);
+char my_to_upper(char ch);
+char my_to_lower(char ch);
+
+int my_isalpha(char ch)
+{
+    if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z'))
+        return 1;
+    else
+        return 0;
+}
+
+int my_isdigit(char ch)
+{
+    if (ch >= '0' && ch <= '9')
+        return 1;
+    else
+        return 0;
+}
+
+int my_is_upper(char ch)
+{
+    if (ch >= 'A' && ch <= 'Z')
+        return 1;
+    else
+        return 0;
+}
+
+char my_to_upper(char ch)
+{
+    if (ch >= 'a' && ch <= 'z')
+        return ch - 32;
+    else
+        return ch;
+}
+
+char my_to_lower(char ch)
+{
+    if (ch >= 'A' && ch <= 'Z')
+        return ch + 32;
+    else
+        return ch;
+}
+
+int main()
+{
+    printf("my_isalpha('A') = %d\n", my_isalpha('A'));
+    printf("my_isalpha('7') = %d\n", my_isalpha('7'));
+
+    printf("my_isdigit('5') = %d\n", my_isdigit('5'));
+    printf("my_isdigit('b') = %d\n", my_isdigit('b'));
+
+    printf("my_is_upper('M') = %d\n", my_is_upper('M'));
+    printf("my_is_upper('m') = %d\n", my_is_upper('m'));
+
+    printf("my_to_upper('c') = %c\n", my_to_upper('c'));
+    printf("my_to_upper('H') = %c\n", my_to_upper('H'));
+
+    printf("my_to_lower('Q') = %c\n", my_to_lower('Q'));
+    printf("my_to_lower('q') = %c\n", my_to_lower('q'));
+
+    return 0;
+}
