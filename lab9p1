@@ -51,7 +51,7 @@ int main(void)
                 if (ch == 'R')
                 {
                     count++;
-                    state = S2;   // 允许重叠，所以回到 "FR"
+                    state = S2;   
                 }
                 else if (ch == 'F')
                 {
