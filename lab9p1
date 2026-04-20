@@ -1,0 +1,73 @@
+#include <stdio.h>
+
+typedef enum
+{
+    S0,   // nothing
+    S1,   // F
+    S2,   // FR
+    S3    // FRF
+} State;
+
+int main(void)
+{
+    char str[200];
+    int i = 0;
+    int count = 0;
+    State state = S0;
+
+    printf("Enter a string containing only F and R: ");
+    scanf("%199s", str);
+
+    while (str[i] != '\0')
+    {
+        char ch = str[i];
+
+        switch (state)
+        {
+            case S0:
+                if (ch == 'F')
+                    state = S1;
+                else
+                    state = S0;
+                break;
+
+            case S1:
+                if (ch == 'F')
+                    state = S1;
+                else if (ch == 'R')
+                    state = S2;
+                else
+                    state = S0;
+                break;
+
+            case S2:
+                if (ch == 'F')
+                    state = S3;
+                else
+                    state = S0;
+                break;
+
+            case S3:
+                if (ch == 'R')
+                {
+                    count++;
+                    state = S2;   // 允许重叠，所以回到 "FR"
+                }
+                else if (ch == 'F')
+                {
+                    state = S1;
+                }
+                else
+                {
+                    state = S0;
+                }
+                break;
+        }
+
+        i++;
+    }
+
+    printf("Number of occurrences of FRFR = %d\n", count);
+
+    return 0;
+}
