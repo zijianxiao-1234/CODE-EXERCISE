@@ -1,0 +1,136 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_QUEUE 10
+#define MAX_STR 50
+
+typedef struct
+{
+    char data[MAX_QUEUE][MAX_STR];
+    int front;
+    int rear;
+} Queue;
+
+// clear — clear the queue
+void clear(Queue *q)
+{
+    q->front = 0;
+    q->rear = 0;
+}
+
+// is_empty — return 1 if empty
+int is_empty(Queue *q)
+{
+    return q->front == q->rear;
+}
+
+// is_full — return 1 if full
+int is_full(Queue *q)
+{
+    return q->rear == MAX_QUEUE;
+}
+
+// add — add a string at the end
+void add(Queue *q, char str[])
+{
+    if (is_full(q))
+    {
+        printf("Queue is full.\n");
+        return;
+    }
+
+    strcpy(q->data[q->rear], str);
+    q->rear++;
+}
+
+// remove — remove a string from the front
+void remove_queue(Queue *q, char str[])
+{
+    if (is_empty(q))
+    {
+        printf("Queue is empty.\n");
+        str[0] = '\0';
+        return;
+    }
+
+    strcpy(str, q->data[q->front]);
+    q->front++;
+}
+
+// display the queue
+void display(Queue *q)
+{
+    int i;
+
+    if (is_empty(q))
+    {
+        printf("Queue is empty.\n");
+        return;
+    }
+
+    printf("Queue: ");
+    for (i = q->front; i < q->rear; i++)
+    {
+        printf("%s ", q->data[i]);
+    }
+    printf("\n");
+}
+
+int main()
+{
+    Queue q;
+    int choice;
+    char str[MAX_STR];
+    char removed[MAX_STR];
+
+    clear(&q);
+
+    while (1)
+    {
+        printf("\n1. Add\n");
+        printf("2. Remove\n");
+        printf("3. Display\n");
+        printf("4. Clear\n");
+        printf("0. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+        getchar();
+
+        if (choice == 1)
+        {
+            printf("Enter a string: ");
+            fgets(str, MAX_STR, stdin);
+            str[strcspn(str, "\n")] = '\0';
+
+            add(&q, str);
+        }
+        else if (choice == 2)
+        {
+            remove_queue(&q, removed);
+
+            if (removed[0] != '\0')
+            {
+                printf("Removed: %s\n", removed);
+            }
+        }
+        else if (choice == 3)
+        {
+            display(&q);
+        }
+        else if (choice == 4)
+        {
+            clear(&q);
+            printf("Queue cleared.\n");
+        }
+        else if (choice == 0)
+        {
+            break;
+        }
+        else
+        {
+            printf("Invalid choice.\n");
+        }
+    }
+
+    return 0;
+}
