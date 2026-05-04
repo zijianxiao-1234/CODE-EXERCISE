@@ -1,0 +1,73 @@
+#include <stdio.h>
+
+int main()
+{
+    char str[20], *p;
+
+    printf("Input about 10 characters of string\n");
+    scanf("%s", str);
+
+    // Pointer variable refers to address of string
+    p = str;
+
+    // Show string by shifting top character of string to right
+    while(p != '\0')
+    {
+        printf("%s\n", p)
+        p++;
+    }
+
+    return 0;
+}
+
+#include <stdio.h>
+
+int main()
+{
+    char str[20], *p;
+
+    printf("Input about 10 characters of string\n");
+    scanf("%s", str);
+
+    // Pointer variable refers to address of string
+    p = str;
+
+    while(p != '\0')
+    {
+        p++;
+    }
+    p--;
+
+    while(p >= str)
+    {
+      printf("%c", *p);
+    }
+    printf("\n");
+
+    return 0;
+}
+
+#include <stdio.h>
+
+int main()
+{
+    double arr[10], *max;
+    int i;
+    
+    printf("Input about 10 numbers\n");
+    for(i = 0; i<10; i++)
+    {
+      scanf("%lf", &arr[i]);
+    }
+
+    max = &arr[0];
+    for(i=1; i<10; i++)
+    {
+      if(arr[i] > *max)
+      max = &arr[i];
+    }
+
+    printf("The maximum number is %lf\n", *max);
+    return 0;
+}
+    
